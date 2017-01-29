@@ -3,7 +3,6 @@
 namespace App;
 
 use Models\UserModel;
-use PDOException;
 
 class UserAuth
 {
@@ -11,60 +10,15 @@ class UserAuth
         session_start();
     }
 
-    // TODO: refaktorisati, prebaciti u model User
-    public static function register($username, $password, $role = 'employee')
+    public static function login($username, $password)
     {
-        $database = new Database();
-        $conn = $database->dbConnection();
+        $user = UserModel::findByUsername($username);
 
-
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $stmt = $conn->prepare("INSERT INTO users(username, password, role) 
-                                VALUES(:username, :password, :role)");
-
-        $stmt->bindparam(":username", $username);
-        $stmt->bindparam(":password", $hashedPassword);
-        $stmt->bindparam(":role", $role);
-
-        return $stmt->execute();
-    }
-
-
-    public static function login($uname, $upass)
-    {
-        try
-        {
-            $database = new Database();
-            $db = $database->dbConnection();
-
-            // TODO: refaktorisati i koristiti ORM model
-            $stmt = $db->prepare("SELECT id, username, password, role
-                    FROM users WHERE username=:username ");
-            $stmt->execute([':username'=>$uname]);
-
-            $userRow=$stmt->fetch();
-
-            if($stmt->rowCount() == 1) {
-                $user = new UserModel();
-                $user->id = $userRow['id'];
-                $user->username = $userRow['username'];
-                $user->password = $userRow['password'];
-                $user->role = $userRow['role'];
-            } else {
-                $user = null;
-            }
-
-
-            if($user != null && password_verify($upass, $user->password)) {
-                $_SESSION['user_object'] = $user;
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch(PDOException $e) {
-            die($e->getMessage());
+        if($user != null && password_verify($password, $user->password)) {
+            $_SESSION['user_object'] = $user;
+            return true;
+        } else {
+            return false;
         }
     }
 

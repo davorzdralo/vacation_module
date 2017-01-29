@@ -45,7 +45,7 @@ class VacationController extends BaseController {
             $vacation = VacationModel::find($id);
 
             $vacation->status = $action;
-            $vacation->save();
+            $vacation->update();
         }
 
         $vacations = VacationModel::getAll();

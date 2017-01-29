@@ -52,7 +52,7 @@ class UserController extends BaseController {
 
             if(UserModel::usernameTaken($username)) {
                 $this->parameters['error'] = "This username is already taken";
-            } else if (UserAuth::register($username, $password)) {
+            } else if (UserModel::register($username, $password)) {
                 header("Location: index.php?controller=user&action=login&registered=true");
             } else {
                 $this->parameters['error'] = "There was a problem with your registration";
