@@ -1,1 +1,4 @@
-# vacation_module
+Vacation module
+====================
+
+Just a demo application
