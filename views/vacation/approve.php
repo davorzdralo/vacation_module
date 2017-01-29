@@ -1,7 +1,3 @@
-<a href="?controller=vacation&action=request">Approve vacation</a>
-<a href="?controller=user&action=logout">Logout</a>
-
-
 <div class="container">
 
     <table class="table table-striped">

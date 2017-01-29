@@ -52,7 +52,7 @@ if (method_exists($controllerInstance, $actionName) && is_callable([$controllerI
 $content = render("views/$controller/$action.php", $controllerInstance->parameters);
 $controllerInstance->parameters['content'] = $content;
 
-print render("views/layout.php", $controllerInstance->parameters);
+print render('views/layouts/' . $controllerInstance->layout . '.php', $controllerInstance->parameters);
 
 function render($view, $parameters) {
     ob_start();

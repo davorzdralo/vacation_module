@@ -21,10 +21,21 @@ class VacationController extends BaseController {
             $vacation->status = 'pending';
             $vacation->insert();
         }
+
+        $remainingDays = VacationModel::remainingVacationDays(UserAuth::user()->id);
+
+        $this->parameters = [
+            'remainingDays' => $remainingDays,
+            'user' => UserAuth::user()->username,
+        ];
+
+        $this->layout = 'user_layout';
     }
 
     public function historyAction() {
         $vacations = VacationModel::getAllForUser(UserAuth::user()->id);
+
+        $this->layout = 'user_layout';
         $this->parameters = ['vacations' => $vacations];
     }
 
@@ -40,6 +51,8 @@ class VacationController extends BaseController {
         }
 
         $vacations = VacationModel::getAll();
+
+        $this->layout = 'user_layout';
         $this->parameters = ['vacations' => $vacations];
     }
 }

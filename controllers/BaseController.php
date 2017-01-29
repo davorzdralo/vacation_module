@@ -7,5 +7,5 @@ abstract class BaseController
 {
     public $parameters = [];
 
-    // TODO: dodati defaultni layout
+    public $layout = 'layout';
 }

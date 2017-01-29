@@ -84,8 +84,6 @@ class VacationModel {
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-//        var_dump($results); exit;
-
         $vacations = [];
         foreach ($results as $vacation) {
             $model = new VacationModel();
@@ -132,5 +130,21 @@ class VacationModel {
         }
 
         return $vacations;
+    }
+
+    public static function remainingVacationDays($user_id) {
+        $database = new Database();
+        $connection = $database->dbConnection();
+
+        $query = "SELECT sum(end - start) as days
+                FROM vacations
+                WHERE YEAR(start) = YEAR(CURDATE()) 
+                    and status = 'approved' 
+                    and user_id = :user_id";
+
+        $stmt = $connection->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+        return 20 - $stmt->fetchColumn();
     }
 }
