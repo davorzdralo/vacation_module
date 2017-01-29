@@ -1,7 +1,6 @@
 <?php
 
-// TODO: mozda zameniti namespaceovima?
-
+namespace Config;
 /**
  * This class exists only to group up the constants required to connect to the
  * database. It is an abstract class because it should never be instantiated.

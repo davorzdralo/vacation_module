@@ -1,6 +1,9 @@
 <?php
 
-use Model\UserModel;
+namespace App;
+
+use Models\UserModel;
+use PDOException;
 
 class UserAuth
 {
@@ -38,9 +41,9 @@ class UserAuth
             // TODO: refaktorisati i koristiti ORM model
             $stmt = $db->prepare("SELECT id, username, password, role
                     FROM users WHERE username=:username ");
-            $stmt->execute(array(':username'=>$uname));
+            $stmt->execute([':username'=>$uname]);
 
-            $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+            $userRow=$stmt->fetch();
 
             if($stmt->rowCount() == 1) {
                 $user = new UserModel();

@@ -2,11 +2,8 @@
 
 namespace Controllers;
 
-// TODO: prebaciti u autoloader
-require_once('controllers/BaseController.php');
-
-use Model\UserModel;
-use UserAuth;
+use Models\UserModel;
+use App\UserAuth;
 
 class UserController extends BaseController {
 

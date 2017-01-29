@@ -1,46 +1,39 @@
 <?php
 
-// TODO: napuniti klase pomocu autoloadera
-require_once('app/UserAuth.php');
-require_once('models/UserModel.php');
-require_once('models/VacationModel.php');
-require_once('database/Database.php');
+/* Auto-loader for PHP classes used in project. It works for all classes that
+ * follow the convention: the class must be located in a directory of the
+ * same name as the namespace, with no nesting. The class must have the same
+ * name as the file, except the .php extension. "Views" can not be loaded this
+ * way, and they are still manually required when needed.
+ */
+spl_autoload_register(function ($classname) {
+    $parts = explode("\\", $classname);
+    $filepath = strtolower($parts[0]) . DIRECTORY_SEPARATOR . $parts[1] . '.php';
+    if (file_exists($filepath)) {
+        require_once($filepath);
+    }
+});
 
-// First thing we do is initialise user authentication.
+
+// First thing we do is initialise user authentication. For now, this simpluy starts the session.
+use App\UserAuth;
 UserAuth::initialise();
 
+// We read the 'controller' and 'action' parameters if they are set, or set the
+// default values if the are not. By default, we redirect the user to the login page
+// whre they will get redirected to an appropriate "home" page if they are already logged in.
+$controller = isset($_GET['controller']) ? $_GET['controller'] : "user";
+$action = isset($_GET['action']) ? $_GET['action'] : "login";
 
-$controller = isset($_GET['controller']) ? $_GET['controller'] : "home";
-$action = isset($_GET['action']) ? $_GET['action'] : "index";
-
-//var_dump(UserAuth::isLoggedIn()); exit;
-
-if(UserAuth::isLoggedIn()) {
-    // TODO: postaviti razlicit default u zavisnosti od toga koji tip korisnika je ulogovan
-    // We read the 'controller' and 'action' parameters if they are set, or set the
-    // default values if the are not.
-    $controller = isset($_GET['controller']) ? $_GET['controller'] : "home";
-    $action = isset($_GET['action']) ? $_GET['action'] : "index";
-} else if($controller == 'user') {
-    // ako nije ulogovan, ali ide na login ili error, pustimo ga
-    // TODO: dodati izuzetke stranica za koje korisnik ne mora da bude ulogovan kao 404 akcija, ili ceo kontroler error
-} else {
+if(!UserAuth::isLoggedIn() && $controller != 'user') {
     $controller = "user";
     $action = "login";
 }
 
-$className = ucfirst($controller) . 'Controller';
-$classNameWithPackage = 'Controllers\\' . $className;
-$pathToController = 'controllers/' . $className . '.php';
-
-if (file_exists($pathToController)) {
-    require_once($pathToController);
-} else {
-    die("Controller in path '$pathToController' does not exist!");
-}
-
-$controllerInstance = new $classNameWithPackage();
+$className = 'Controllers\\' . ucfirst($controller) . 'Controller';
 $actionName = $action . "Action";
+
+$controllerInstance = new $className();
 
 // Check that the appropriate action method exists in the controller class, and that it is callable.
 if (method_exists($controllerInstance, $actionName) && is_callable([$controllerInstance, $actionName])) {

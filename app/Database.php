@@ -1,6 +1,10 @@
 <?php
 
-require_once('config/config.php');
+namespace App;
+
+use Config\DbConfig;
+use PDO;
+use PDOException;
 
 class Database
 {

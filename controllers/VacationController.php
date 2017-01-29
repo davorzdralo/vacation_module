@@ -2,10 +2,8 @@
 
 namespace Controllers;
 
-use Model\VacationModel;
-use UserAuth;
-
-require_once('controllers/BaseController.php');
+use Models\VacationModel;
+use App\UserAuth;
 
 class VacationController extends BaseController {
 

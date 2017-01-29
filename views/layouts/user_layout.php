@@ -29,7 +29,9 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <?php if(UserAuth::user()->role === 'employee') { ?>
+                    <?php use App\UserAuth;
+
+                    if(UserAuth::user()->role === 'employee') { ?>
                         <li><a href="?controller=vacation&action=request">Request vacation</a></li>
                         <li><a href="?controller=vacation&action=history">Vacation history</a></li>
                     <?php } ?>

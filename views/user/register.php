@@ -1,7 +1,7 @@
 <div class="signin-form">
     <div class="container">
         <form method="post" class="form-signin">
-            <h2 class="form-signin-heading">Sign up.</h2><hr />
+            <h2 class="form-signin-heading">Sign up for Vacation Planer</h2><hr />
             <?php
             if(isset($error))
             {
@@ -31,15 +31,15 @@
                 <input type="password" class="form-control" name="password" placeholder="Enter Password" />
             </div>
 
-            <div class="clearfix"></div><hr />
+            <hr />
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" name="btn-signup">
+                <button type="submit" class="btn btn-default" name="btn-signup">
                     <i class="glyphicon glyphicon-open-file"></i>&nbsp;SIGN UP
                 </button>
             </div>
             <br />
-            <label>have an account ! <a href="?controller=user&action=login">Sign In</a></label>
+            <label>You already have an account? <a href="?controller=user&action=login">Sign In</a></label>
         </form>
     </div>
 </div>

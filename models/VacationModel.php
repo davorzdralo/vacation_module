@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Models;
 
-use Database;
+use App\Database;
 use PDO;
 
 class VacationModel {

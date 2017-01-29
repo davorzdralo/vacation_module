@@ -34,7 +34,7 @@
                 </button>
             </div>
             <br />
-            <label>Don't have account yet ! <a href="?controller=user&action=register">Sign Up</a></label>
+            <label>Don't have account yet? <a href="?controller=user&action=register">Sign Up</a></label>
         </form>
     </div>
 </div>
