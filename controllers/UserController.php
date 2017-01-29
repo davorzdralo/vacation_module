@@ -21,7 +21,11 @@ class UserController extends BaseController {
         // check if there are errors from submit action, and pass them as
         // parameters to the view if there are
         if(isset($_GET['error']) && $_GET['error'] == 'true') {
-            $this->parameters = ['error' => 'Invalid login data, please check your username and password'];
+            $this->parameters['error']= 'Invalid login data, please check your username and password';
+        }
+
+        if(isset($_GET['registered']) && $_GET['registered'] == 'true') {
+            $this->parameters['registered']= 'You have been successfully registered!';
         }
     }
 

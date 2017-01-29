@@ -2,29 +2,15 @@
     <div class="container">
         <form method="post" class="form-signin">
             <h2 class="form-signin-heading">Sign up for Vacation Planer</h2><hr />
-            <?php
-            if(isset($error))
-            {
 
-                ?>
+            <?php if(isset($error)) { ?>
                 <div class="alert alert-danger">
-                    <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
+                    <i class="glyphicon glyphicon-remove"></i> &nbsp; <?php echo $error; ?>
                 </div>
-                <?php
-
-            }
-            else if(isset($_GET['joined']))
-            {
-                ?>
-                <div class="alert alert-info">
-                    <i class="glyphicon glyphicon-log-in"></i> &nbsp; Successfully registered <a href='index.php'>login</a> here
-                </div>
-                <?php
-            }
-            ?>
+            <?php } ?>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="Enter Username" value="<?php if(isset($error)){echo $username;}?>" />
+                <input type="text" class="form-control" name="username" placeholder="Enter Username" value="<?php if(isset($error)) { echo $username; } ?>" />
             </div>
 
             <div class="form-group">

@@ -6,16 +6,19 @@
             <h2 class="form-signin-heading">Log in to Vacation Planer</h2><hr />
 
             <div id="error">
-                <?php
-                if(isset($error))
-                {
-                    ?>
+                <?php if(isset($error)) { ?>
                     <div class="alert alert-danger">
-                        <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
+                        <i class="glyphicon glyphicon-remove"></i> &nbsp; <?php echo $error; ?>
                     </div>
-                    <?php
-                }
-                ?>
+                <?php } ?>
+            </div>
+
+            <div id="registered">
+                <?php if(isset($registered)) { ?>
+                    <div class="alert alert-success">
+                        <i class="glyphicon glyphicon-ok"></i> &nbsp; <?php echo $registered; ?>
+                    </div>
+                    <?php } ?>
             </div>
 
             <div class="form-group">
