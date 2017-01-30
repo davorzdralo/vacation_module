@@ -12,12 +12,12 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="start">Start date</label>
-                <input type="date" class="form-control" id="start" required>
+                <input type="date" class="form-control" id="start" name="start" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="end">End date</label>
-                <input type="date" class="form-control" id="end" required>
+                <input type="date" class="form-control" id="end" name="end" required>
             </div>
         </div>
 
