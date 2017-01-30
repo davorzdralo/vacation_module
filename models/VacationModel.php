@@ -5,7 +5,7 @@ namespace Models;
 use App\Database;
 use PDO;
 
-class VacationModel {
+class VacationModel implements BaseModel {
     const VACATION_DAYS = 20;
 
     public $id;

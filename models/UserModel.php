@@ -4,7 +4,7 @@ namespace Models;
 
 use App\Database;
 
-class UserModel {
+class UserModel implements BaseModel {
     public $id;
     public $username;
     public $password;
