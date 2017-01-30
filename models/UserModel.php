@@ -91,9 +91,9 @@ class UserModel implements BaseModel {
         $stmt = $conn->prepare("INSERT INTO users(username, password, role) 
                                 VALUES(:username, :password, :role)");
 
-        $stmt->bindparam(":username", $username);
-        $stmt->bindparam(":password", $hashedPassword);
-        $stmt->bindparam(":role", $role);
+        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":password", $hashedPassword);
+        $stmt->bindParam(":role", $role);
 
         return $stmt->execute();
     }

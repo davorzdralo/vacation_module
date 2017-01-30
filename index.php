@@ -16,6 +16,7 @@ spl_autoload_register(function ($classname) {
 
 
 // First thing we do is initialise user authentication. For now, this simply starts the session.
+use App\Renderer;
 use App\UserAuth;
 UserAuth::initialise();
 
@@ -53,23 +54,8 @@ if (method_exists($controllerInstance, $actionName) && is_callable([$controllerI
 // After the action method has been executed, it's time to render the view. We
 // find the view based on controller and action names, and render it with
 // parameters from the action method.
-$content = render("views/$controller/$action.php", $controllerInstance->parameters);
-$controllerInstance->parameters['content'] = $content;
 
-print render('views/layouts/' . $controllerInstance->layout . '.php', $controllerInstance->parameters);
+$view = "views/$controller/$action.php";
 
-/**
- * @param $view
- * @param $parameters
- * @return string
- */
-function render($view, $parameters) {
-    ob_start();
-    //extract everything in param into the current scope
-    extract($parameters);
-    include($view);
-
-    $output = ob_get_contents();
-    ob_end_clean();
-    return $output;
-}
+$renderer = new Renderer();
+$renderer->render($controllerInstance, $view);
